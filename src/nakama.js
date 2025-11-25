@@ -7,9 +7,9 @@ class Nakama {
   this.client = new Client(
     "defaultkey",
     window.location.hostname,
-    "",      // no port needed
-    true,    // SSL
-    "/api/nakama" // proxy path
+    "",
+    true,
+    "/api/nakama"
   );
 
   this.session = null;
