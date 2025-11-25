@@ -2,14 +2,15 @@
 import { Client } from "@heroiclabs/nakama-js";
 import { v4 as uuidv4 } from "uuid";
 
-constructor() {
-  this.client = new Client(
-    "defaultkey",
-    window.location.hostname,
-    "",
-    true,
-    "/api/nakama"
-  );
+class Nakama {
+    constructor() {
+ this.client = new Client(
+  "defaultkey",
+  window.location.hostname,
+  "",
+  true,
+  "/api/nakama"
+);
 
   this.session = null;
   this.socket = null;

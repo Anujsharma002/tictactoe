@@ -7,8 +7,8 @@ export default async function handler(req, res) {
       method: req.method,
       headers: {
         ...req.headers,
-        host: undefined,              // avoid host mismatch
-        "content-length": undefined,  // avoid hanging requests
+        host: undefined,
+        "content-length": undefined,
       },
       body: ["GET", "HEAD"].includes(req.method) ? undefined : req.body,
     });
