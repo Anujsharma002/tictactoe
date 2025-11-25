@@ -2,8 +2,7 @@
 import { Client } from "@heroiclabs/nakama-js";
 import { v4 as uuidv4 } from "uuid";
 
-class Nakama {
-    constructor() {
+constructor() {
   this.client = new Client(
     "defaultkey",
     window.location.hostname,
