@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   try {
     // Remove `/api/nakama` so we send correct URL to Nakama
     const targetPath = req.url.replace("/api/nakama", "");
-    const url = `http://44.222.129.141:7350${targetPath}`;
+    const url = `http://172.31.65.216:7350${targetPath}`;
 
     const response = await fetch(url, {
       method: req.method,
