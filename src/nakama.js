@@ -4,13 +4,18 @@ import { v4 as uuidv4 } from "uuid";
 
 class Nakama {
     constructor() {
-        this.client = new Client("defaultkey", "44.222.129.141", "7350");
-        this.client.ssl = false;
+  this.client = new Client(
+    "defaultkey",
+    window.location.hostname,
+    "",      // no port needed
+    true,    // SSL
+    "/api/nakama" // proxy path
+  );
 
-        this.session = null;
-        this.socket = null;
-        this.username = null;
-    }
+  this.session = null;
+  this.socket = null;
+  this.username = null;
+}
 
     //------------------------------------------------------
     // LOGIN USING deviceID + username
