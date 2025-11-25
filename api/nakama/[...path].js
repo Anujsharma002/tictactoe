@@ -1,15 +1,15 @@
 export default async function handler(req, res) {
   try {
-    // Remove `/api/nakama` so we send correct URL to Nakama
+    // Strip `/api/nakama` so the path matches Nakama correctly
     const targetPath = req.url.replace("/api/nakama", "");
-    const url = `http://172.31.65.216:7350${targetPath}`;
+    const url = `http://44.222.129.141:7350${targetPath}`;
 
     const response = await fetch(url, {
       method: req.method,
       headers: {
         ...req.headers,
-        host: undefined,
-        "content-length": undefined,
+        host: undefined,               // prevent host header conflict
+        "content-length": undefined,   // avoids hanging requests
       },
       body: req.method === "GET" ? undefined : req.body,
     });
