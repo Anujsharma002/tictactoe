@@ -1,19 +1,22 @@
 export default async function handler(req, res) {
-  // Capture everything after /api/nakama/
-  const path = req.query.path.join("/");
+  try {
+    const path = req.query.path?.join("/") ?? "";
+    const url = `http://44.222.129.141:7350/${path}${req.url.split(path)[1] ?? ""}`;
 
-  const url = `http://44.222.129.141:7350/${path}`;
+    const response = await fetch(url, {
+      method: req.method,
+      headers: {
+        ...req.headers,
+        host: undefined,
+        "content-length": undefined,
+      },
+      body: ["GET", "HEAD"].includes(req.method) ? undefined : req.body,
+    });
 
-  const response = await fetch(url, {
-    method: req.method,
-    headers: {
-      ...req.headers,
-      host: undefined,          // prevent host mismatch
-      'content-length': undefined,
-    },
-    body: req.method === "GET" ? undefined : req.body,
-  });
-
-  const text = await response.text();
-  res.status(response.status).send(text);
+    const text = await response.text();
+    res.status(response.status).send(text);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Proxy Error");
+  }
 }
