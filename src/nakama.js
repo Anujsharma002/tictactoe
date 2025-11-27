@@ -8,13 +8,14 @@ class Nakama {
     const serverKey = "defaultkey";
 
     // Use proxy for REST
-    this.client = new Client(
-        serverKey,
-        host,
-        "",        // no port
-        true,      // use SSL (HTTPS)
-        "/api/nakama"  // REST goes through proxy
-    );
+   this.client = new Client(
+  "defaultkey",
+  window.location.hostname,
+  "",
+  true,
+  "/api/nakama"
+);
+
 
     this.session = null;
     this.socket = null;
@@ -44,7 +45,7 @@ class Nakama {
         localStorage.setItem("user_id", this.session.user_id);
 
         // Connect socket (IMPORTANT: pass session object)
-        this.socket = this.client.createSocket(false, false);
+        this.socket = this.client.createSocket(true, false);
         await this.socket.connect(this.session);
 
         console.log("Logged in with:", username);
