@@ -3,19 +3,24 @@ import { Client } from "@heroiclabs/nakama-js";
 import { v4 as uuidv4 } from "uuid";
 
 class Nakama {
-    constructor() {
- this.client = new Client(
-  "defaultkey",
-  window.location.hostname,
-  "",
-  true,
-  "/api/nakama"
-);
+   constructor() {
+    const host = window.location.hostname; // vercel domain
+    const serverKey = "defaultkey";
 
-  this.session = null;
-  this.socket = null;
-  this.username = null;
+    // Use proxy for REST
+    this.client = new Client(
+        serverKey,
+        host,
+        "",        // no port
+        true,      // use SSL (HTTPS)
+        "/api/nakama"  // REST goes through proxy
+    );
+
+    this.session = null;
+    this.socket = null;
+    this.username = null;
 }
+
 
     //------------------------------------------------------
     // LOGIN USING deviceID + username
