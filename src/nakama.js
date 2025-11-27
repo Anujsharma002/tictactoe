@@ -3,12 +3,8 @@ import { Client } from "@heroiclabs/nakama-js";
 import { v4 as uuidv4 } from "uuid";
 
 class Nakama {
-   constructor() {
-    const host = window.location.hostname; // vercel domain
-    const serverKey = "defaultkey";
-
-    // Use proxy for REST
-   this.client = new Client(
+    constructor() {
+ this.client = new Client(
   "defaultkey",
   window.location.hostname,
   "",
@@ -16,12 +12,10 @@ class Nakama {
   "/api/nakama"
 );
 
-
-    this.session = null;
-    this.socket = null;
-    this.username = null;
+  this.session = null;
+  this.socket = null;
+  this.username = null;
 }
-
 
     //------------------------------------------------------
     // LOGIN USING deviceID + username
@@ -45,7 +39,7 @@ class Nakama {
         localStorage.setItem("user_id", this.session.user_id);
 
         // Connect socket (IMPORTANT: pass session object)
-        this.socket = this.client.createSocket(true, false);
+        this.socket = this.client.createSocket(false, false);
         await this.socket.connect(this.session);
 
         console.log("Logged in with:", username);
