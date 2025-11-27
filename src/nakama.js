@@ -4,13 +4,13 @@ import { v4 as uuidv4 } from "uuid";
 
 class Nakama {
     constructor() {
- this.client = new Client(
-  "defaultkey",
-  window.location.hostname,
-  "",
-  true,
-  "/api/nakama"
-);
+  this.client = new Client(
+    "defaultkey",
+    window.location.hostname,   // EC2 public DNS
+    "",
+    false,                      // ❗ NO SSL (HTTP only)
+    "/nakama"                   // proxy path
+  );
 
   this.session = null;
   this.socket = null;
